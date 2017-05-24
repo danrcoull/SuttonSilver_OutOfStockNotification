@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="SuttonSilver\OutOfStockNotification\Api\NotificationsRepositoryInterface" type="SuttonSilver\OutOfStockNotification\Model\NotificationsRepository"/>
+	<preference for="SuttonSilver\OutOfStockNotification\Api\Data\NotificationsInterface" type="SuttonSilver\OutOfStockNotification\Model\Notifications"/>
+	<preference for="SuttonSilver\OutOfStockNotification\Api\Data\NotificationsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="SuttonSilver\OutOfStockNotification\Model\ResourceModel\Notifications\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">suttonsilver_notifications</argument>
+			<argument name="resourceModel" xsi:type="string">SuttonSilver\OutOfStockNotification\Model\ResourceModel\Notifications\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="suttonsilver_notifications_grid_data_source" xsi:type="string">SuttonSilver\OutOfStockNotification\Model\ResourceModel\Notifications\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
