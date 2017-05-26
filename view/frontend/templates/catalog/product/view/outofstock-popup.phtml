@@ -1,0 +1,64 @@
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Notify'); ?>
+<div class="" id="outofstock-modal">
+    <div class="modal-body">
+        <div class="modal-inner-shadow">
+            <h3 class="text text-center"><?php echo __('Notify Your Interest'); ?></h3>
+            <div class="content">
+                <form action="<?php /* @escapeNotVerified */ echo $block->getUrl('outofstock/index/notify') ?>"
+                      method="post"
+                      class="form notify"
+                      id="form-validate"
+                      data-mage-init='{"validation":{}}'
+                      enctype="multipart/form-data">
+
+                    <fieldset class="fieldset" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                        <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $_product->getId() ?>" />
+                        <?php echo $block->getBlockHtml('formkey')?>
+                        <div class="field note"><p>Please enter your email address below, you will recieve an email when this <?php echo __('course'); ?> become available.</p></div>
+                        <div class="form-group email required">
+                            <label for="email" class="label"><span><?php echo __('email'); ?></span></label>
+                            <div class="control">
+                                <input type="email" name="email" alt="email" id="email_address" class="form-control input-text" data-validate="{required:true, 'validate-email':true}" />
+                            </div>
+                        </div>
+
+                        <div class="actions-toolbar">
+                            <div class="primary">
+                                <button type="submit"
+                                        title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                                        class="action submit primary">
+                                    <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function ($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                modalClass: 'modal-dialog',
+                title: '',
+                buttons: []
+            };
+
+            var popup = modal(options, $('#outofstock-modal'));
+            $('.outofstock .tocart').on('click', function(e)
+            {
+                $('#outofstock-modal').modal('openModal');
+                e.preventDefault();
+            });
+        }
+    );
+</script>

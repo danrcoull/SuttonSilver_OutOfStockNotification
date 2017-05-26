@@ -87,20 +87,6 @@
 				</item>
 			</argument>
 		</column>
-		<column name="entity_id">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="filter" xsi:type="string">text</item>
-					<item name="label" translate="true" xsi:type="string">entity_id</item>
-					<item name="editor" xsi:type="array">
-						<item name="editorType" xsi:type="string">text</item>
-						<item name="validation" xsi:type="array">
-							<item name="required-entry" xsi:type="boolean">true</item>
-						</item>
-					</item>
-				</item>
-			</argument>
-		</column>
 		<actionsColumn class="SuttonSilver\OutOfStockNotification\Ui\Component\Listing\Column\NotificationsActions" name="actions">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
@@ -112,7 +98,22 @@
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="filter" xsi:type="string">text</item>
-					<item name="label" translate="true" xsi:type="string">email</item>
+					<item name="label" translate="true" xsi:type="string">Email</item>
+					<item name="editor" xsi:type="array">
+						<item name="editorType" xsi:type="string">text</item>
+						<item name="validation" xsi:type="array">
+							<item name="required-entry" xsi:type="boolean">true</item>
+						</item>
+					</item>
+				</item>
+			</argument>
+		</column>
+
+		<column name="product_name">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">product Name</item>
 					<item name="editor" xsi:type="array">
 						<item name="editorType" xsi:type="string">text</item>
 						<item name="validation" xsi:type="array">

@@ -27,20 +27,9 @@ class InstallSchema implements InstallSchemaInterface
             'notifications_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
-            array('identity' => true,'nullable' => false,'primary' => true,'unsigned' => true,),
+            array('identity' => true,'nullable' => false,'primary' => true,'auto_increment' => true,'unsigned' => true),
             'Entity ID'
         );
-        
-
-        
-        $table_suttonsilver_notifications->addColumn(
-            'entity_id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
-            null,
-            ['nullable' => False,'identity' => true,'auto_increment' => true,'unsigned' => true],
-            'entity_id'
-        );
-        
 
         
         $table_suttonsilver_notifications->addColumn(
@@ -60,7 +49,19 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => False,'unsigned' => true],
             'product_id'
         );
-        
+
+        $table_suttonsilver_notifications->addForeignKey(
+            $setup->getFkName(
+                $setup->getTable('suttonsilver_notifications'),
+                'notifications_id',
+                $setup->getTable('catalog_product_entity'),
+                'entity_id'
+            ),
+            'main_id',
+            $setup->getTable('catalog_product_entity'),
+            'entity_id',
+            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+        );
 
         $setup->getConnection()->createTable($table_suttonsilver_notifications);
 
