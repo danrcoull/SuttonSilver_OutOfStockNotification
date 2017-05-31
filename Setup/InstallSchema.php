@@ -50,18 +50,6 @@ class InstallSchema implements InstallSchemaInterface
             'product_id'
         );
 
-        $table_suttonsilver_notifications->addForeignKey(
-            $setup->getFkName(
-                $setup->getTable('suttonsilver_notifications'),
-                'notifications_id',
-                $setup->getTable('catalog_product_entity'),
-                'entity_id'
-            ),
-            'main_id',
-            $setup->getTable('catalog_product_entity'),
-            'entity_id',
-            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
-        );
 
         $setup->getConnection()->createTable($table_suttonsilver_notifications);
 

@@ -34,7 +34,7 @@ class ChangeTemplate implements ObserverInterface
 
             /** @var \Magento\Framework\View\Layout $layout */
             $layout = $observer->getLayout();
-            $layout->getUpdate()->addHandle('catalog_product_view_unvailable');
+            //DEBUG::$layout->getUpdate()->addHandle('catalog_product_view_unvailable');
             if (!$product->load($product->getId())->isInStock()) {
                 $layout->getUpdate()->addHandle('catalog_product_view_unvailable');
             }

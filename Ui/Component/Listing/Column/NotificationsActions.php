@@ -41,15 +41,6 @@ class NotificationsActions extends \Magento\Ui\Component\Listing\Columns\Column
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item['notifications_id'])) {
                     $item[$this->getData('name')] = [
-                        'edit' => [
-                            'href' => $this->urlBuilder->getUrl(
-                                static::URL_PATH_EDIT,
-                                [
-                                    'notifications_id' => $item['notifications_id']
-                                ]
-                            ),
-                            'label' => __('Edit')
-                        ],
                         'delete' => [
                             'href' => $this->urlBuilder->getUrl(
                                 static::URL_PATH_DELETE,

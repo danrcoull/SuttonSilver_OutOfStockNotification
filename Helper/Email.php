@@ -76,4 +76,30 @@ class Email extends AbstractHelper
 
         $this->inlineTranslation->resume();
     }
+
+
+    public function sendBackInStockEmail($email, $productId){
+        $product = $this->productRepository->getById($productId);
+
+        $templateVars = array(
+            'store' => $this->storeManager->getStore(),
+            'customer_name' => $email,
+            'message'   => 'Thanks for your registering your interest our product is back in stock',
+            'product'   =>$product->getName(),
+            'producturl'   =>$product->getUrl()
+        );
+
+        $this->inlineTranslation->suspend();
+
+        $transport = $this->transportBuilder->setTemplateIdentifier('instock_template')
+            ->setTemplateOptions($this->getTemplateOptionsArray())
+            ->setTemplateVars($templateVars)
+            ->setFrom($this->getFromArray())
+            ->addTo(array($email))
+            ->getTransport();
+
+        $transport->sendMessage();
+
+        $this->inlineTranslation->resume();
+    }
 }

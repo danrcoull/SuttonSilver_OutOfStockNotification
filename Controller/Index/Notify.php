@@ -23,7 +23,7 @@ class Notify extends \Magento\Framework\App\Action\Action
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \SuttonSilver\OutOfStockNotification\Api\NotificationsRepositoryInterface $notificationsRepository,
+        \SuttonSilver\OutOfStockNotification\Model\NotificationsRepository $notificationsRepository,
         \SuttonSilver\OutOfStockNotification\Api\Data\NotificationsInterface $notificationsinterface,
         \Magento\Framework\Message\ManagerInterface $messageManager,
         \SuttonSilver\OutOfStockNotification\Helper\Email $emailHelper,
@@ -51,15 +51,18 @@ class Notify extends \Magento\Framework\App\Action\Action
         $resultRedirect = $this->resultFactory->create('redirect');
         $resultRedirect->setUrl($this->_redirect->getRefererUrl());
 
-        if(empty($post) || !isset($post['product']) || !isset($post['email']) || $this->validator->validate($this->getRequest()))
+        if($this->validator->validate($this->getRequest()))
         {
             return $resultRedirect;
         }
 
-        $this->notificationsinterface->setEmail($post['email']);
-        $this->notificationsinterface->setProductId($post['product']);
+        $data = [];
+        $data['email'] = $this->notificationsinterface->setEmail($post['email']);
+        $data['product_id'] =$this->notificationsinterface->setProductId($post['product']);
+
+
         try {
-            $this->notificationsRepository->save($this->notificationsinterface);
+            $return = $this->notificationsRepository->save($this->notificationsinterface);
 
             $this->messageManager->addSuccessMessage(
                 __('Thanks for your interest, we will notify you when the course becomes available')
@@ -69,9 +72,7 @@ class Notify extends \Magento\Framework\App\Action\Action
 
         }catch(\Exception $e)
         {
-            $this->messageManager->addExceptionMessage(
-                __('We ran into a problem, subscribing you to the product notification')
-            );
+            $this->runError($e);
         }
 
 
@@ -79,6 +80,12 @@ class Notify extends \Magento\Framework\App\Action\Action
         return $resultRedirect;
     }
 
+    public function runError($e){
+        $this->messageManager->addExceptionMessage($e,
+            __('We ran into a problem, subscribing you to the product notification')
+        );
+        return $this;
+    }
 
 
 }

@@ -18,4 +18,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             'SuttonSilver\OutOfStockNotification\Model\ResourceModel\Notifications'
         );
     }
+
+    protected function _initSelect() {
+
+        parent::_initSelect();
+
+        $this->getSelect()->join(
+            ['product_entity' => $this->getTable('catalog_product_entity')],
+            'main_table.product_id = product_entity.entity_id',
+            ['entity_id', 'sku']
+        );
+
+    }
 }

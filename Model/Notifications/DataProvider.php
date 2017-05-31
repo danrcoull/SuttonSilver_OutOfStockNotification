@@ -69,10 +69,10 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $this->collection->getSelect()->joinLeft(
             ['product_varchar' => $this->collection->getTable('catalog_product_entity_varchar')],
             "product_varchar.entity_id = product_entity.entity_id AND product_varchar.attribute_id = $productNameAttributeId",
-            []
+            ['product_name']
 
-        )->columns(['product_name' => 'product_varchar.value']);
-        
+        );
+
 
         $items = $this->collection->getItems();
         foreach ($items as $model) {
