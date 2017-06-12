@@ -16,6 +16,7 @@ class ChangeTemplate implements ObserverInterface
      * @var Registry
      */
     protected $registry;
+    protected $stockRegistry;
 
     /**
      * @var Product
@@ -23,22 +24,28 @@ class ChangeTemplate implements ObserverInterface
     private $product;
 
     public function __construct(
-        Registry $registry
+        Registry $registry,
+        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
     ) {
         $this->registry = $registry;
+        $this->stockRegistry = $stockRegistry;
     }
 
     public function execute(Observer $observer)
     {
         if($product = $this->getProduct()) {
-
             /** @var \Magento\Framework\View\Layout $layout */
             $layout = $observer->getLayout();
-            //DEBUG::$layout->getUpdate()->addHandle('catalog_product_view_unvailable');
-            if (!$product->load($product->getId())->isInStock()) {
+            $stockData = $this->stockRegistry->getStockItem($product->getId());
+            $inStock = $stockData->getData('is_in_stock');
+            if (!$inStock) {
+
                 $layout->getUpdate()->addHandle('catalog_product_view_unvailable');
             }
+
         }
+
+        return $this;
     }
 
     /**
