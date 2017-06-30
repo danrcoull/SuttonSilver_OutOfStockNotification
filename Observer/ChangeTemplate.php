@@ -38,8 +38,8 @@ class ChangeTemplate implements ObserverInterface
             $layout = $observer->getLayout();
             $stockData = $this->stockRegistry->getStockItem($product->getId());
             $inStock = $stockData->getData('is_in_stock');
-            if (!$product->isSaleable() && !$inStock) {
 
+            if ($inStock == 0) {
                 $layout->getUpdate()->addHandle('catalog_product_view_unvailable');
             }
 
