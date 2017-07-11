@@ -20,7 +20,7 @@ class SendNotification
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
         \SuttonSilver\OutOfStockNotification\Api\Data\NotificationsSearchResultsInterface $notificationsSearchResults,
-        \SuttonSilver\OutOfStockNotification\Api\Data\NotificationsRepositoryInterface $notificationsRepository,
+        \SuttonSilver\OutOfStockNotification\Api\NotificationsRepositoryInterface $notificationsRepository,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \SuttonSilver\OutOfStockNotification\Helper\Email $emailHelper
     )
@@ -51,10 +51,10 @@ class SendNotification
                 $this->emailHelper->sendBackInStockEmail($notification->getEmail(), $notification->getProductId());
                 try {
                     $this->notificationsRepository->delete($product);
-                    $this->logger->addInfo($notification->getId() . "Has been deleted");
+                    $this->logger->info($notification->getId() . " Has been deleted");
                 }catch(\Excepton $e)
                 {
-
+                    $this->logger->error($e->getMessage());
                 }
             }
         }
