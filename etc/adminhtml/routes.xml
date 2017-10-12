@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route frontName="suttonsilver_outofstocknotification" id="suttonsilver_outofstocknotification">
+			<module before="Magento_Backend" name="SuttonSilver_OutOfStockNotification"/>
+		</route>
+	</router>
+</config>

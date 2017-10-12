@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="subscribed_template" label="Subscribed" file="subscribed.html" type="html" module="SuttonSilver_OutOfStockNotification" area="frontend"/>
+    <template id="instock_template" label="Back In Stock" file="instock.html" type="html" module="SuttonSilver_OutOfStockNotification" area="frontend"/>
+</config>

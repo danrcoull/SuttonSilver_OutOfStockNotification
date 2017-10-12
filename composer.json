@@ -1,0 +1,21 @@
+{
+    "name": "suttonsilver/module-outofstocknotification",
+    "description": "Products out of stock get a notification modal",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Sutton Silver",
+            "email": "d.coull@suttonsilver.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "SuttonSilver\\OutOfStockNotification\\": ""
+        }
+    }
+}

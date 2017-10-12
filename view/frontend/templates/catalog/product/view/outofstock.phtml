@@ -1,0 +1,25 @@
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Notify'); ?>
+<div class="ribbon ribbon-top-right unavailable">
+    <span class="">Unavailable</span>
+</div>
+
+<div class="box-tocart outofstock">
+    <div class="fieldset">
+        <div class="message">
+            <p>Would you like us to notify you once this <?php echo __('course'); ?> is available ?</p>
+        </div>
+        <div class="actions">
+            <button type="submit"
+                    title="<?php /* @escapeNotVerified */
+                    echo $buttonTitle ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button">
+                    <span><?php /* @escapeNotVerified */
+                        echo $buttonTitle ?></span>
+            </button>
+            <?php// echo $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php echo $block->getChildHtml('outofstock.notify.popup', true) ?>
