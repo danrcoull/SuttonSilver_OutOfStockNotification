@@ -109,11 +109,12 @@
 			</argument>
 		</column>
 
-		<column name="product_entity.sku">
+		<column name="product_id">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="filter" xsi:type="string">text</item>
-					<item name="label" translate="true" xsi:type="string">Product SKU</item>
+					<item name="label" translate="true" xsi:type="string">Product ID</item>
+					<item name="indexField" xsi:type="string">product_id</item>
 				</item>
 			</argument>
 		</column>

@@ -23,10 +23,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
         parent::_initSelect();
 
-        $this->getSelect()->join(
+        $this->getSelect()->joinLeft(
             ['product_entity' => $this->getTable('catalog_product_entity')],
             'main_table.product_id = product_entity.entity_id',
-            ['entity_id', 'sku']
+            ['*']
         );
 
     }

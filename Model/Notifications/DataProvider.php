@@ -60,18 +60,12 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             ->getAttribute(\Magento\Catalog\Model\Product::ENTITY, \Magento\Catalog\Api\Data\ProductInterface::NAME)
             ->getAttributeId();
 
-        $this->collection->getSelect()->join(
-            ['product_entity' => $this->collection->getTable('catalog_product_entity')],
+        $this->getSelect()->joinLeft(
+            ['product_entity' => $this->getTable('catalog_product_entity')],
             'main_table.product_id = product_entity.entity_id',
-            ['entity_id', 'sku']
+            ['*']
         );
 
-        $this->collection->getSelect()->joinLeft(
-            ['product_varchar' => $this->collection->getTable('catalog_product_entity_varchar')],
-            "product_varchar.entity_id = product_entity.entity_id AND product_varchar.attribute_id = $productNameAttributeId",
-            ['product_name']
-
-        );
 
 
         $items = $this->collection->getItems();

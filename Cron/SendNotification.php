@@ -19,8 +19,8 @@ class SendNotification
      */
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
-        \SuttonSilver\OutOfStockNotification\Api\Data\NotificationsSearchResultsInterface $notificationsSearchResults,
-        \SuttonSilver\OutOfStockNotification\Api\NotificationsRepositoryInterface $notificationsRepository,
+        \SuttonSilver\OutOfStockNotification\Model\ResourceModel\Notifications\CollectionFactory $notificationsSearchResults,
+        \SuttonSilver\OutOfStockNotification\Model\NotificationsRepository $notificationsRepository,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \SuttonSilver\OutOfStockNotification\Helper\Email $emailHelper
     )
@@ -40,8 +40,7 @@ class SendNotification
     public function execute()
     {
         $this->logger->addInfo("Cronjob SendNotification is executed.");
-        $notifications = $this->notificationsSearchResults->getItems();
-        $this->logger->addInfo($notifications);
+        $notifications = $this->notificationsSearchResults->create();
         foreach($notifications as $notification)
         {
             $notification = $this->notificationsRepository->getById($notification->getId());
@@ -50,7 +49,7 @@ class SendNotification
             {
                 $this->emailHelper->sendBackInStockEmail($notification->getEmail(), $notification->getProductId());
                 try {
-                    $this->notificationsRepository->delete($product);
+                    $this->notificationsRepository->delete($notification);
                     $this->logger->info($notification->getId() . " Has been deleted");
                 }catch(\Excepton $e)
                 {
