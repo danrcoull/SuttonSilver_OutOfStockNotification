@@ -31,5 +31,7 @@
         <referenceContainer name="page.messages">
             <block class="SuttonSilver\OutOfStockNotification\Block\DisplayMessages" name="outofstock.displaymessages"/>
         </referenceContainer>
+
+
     </body>
 </page>

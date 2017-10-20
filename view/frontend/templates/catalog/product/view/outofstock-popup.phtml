@@ -3,7 +3,7 @@
 <div class="" id="outofstock-modal">
     <div class="modal-body">
         <div class="modal-inner-shadow">
-            <h3 class="text text-center"><?php echo __('Notify Your Interest'); ?></h3>
+            <h3 class="text text-center"><?php echo __('Notify your interest'); ?></h3>
             <div class="content">
                 <form action="<?php /* @escapeNotVerified */ echo $block->getUrl('outofstock/index/notify') ?>"
                       method="post"
@@ -17,7 +17,7 @@
                         <?php echo $block->getBlockHtml('formkey')?>
                         <div class="field note"><p>Please enter your email address below, you will recieve an email when this <?php echo __('course'); ?> become available.</p></div>
                         <div class="form-group email required">
-                            <label for="email" class="label"><span><?php echo __('email'); ?></span></label>
+                            <label for="email" class="label"><span><?php echo __('Email'); ?></span></label>
                             <div class="control">
                                 <input type="email" name="email" alt="email" id="email_address" class="form-control input-text" data-validate="{required:true, 'validate-email':true}" />
                             </div>
